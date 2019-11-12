@@ -1,10 +1,41 @@
+"use strict";
+exports.__esModule = true;
 function log(message) {
     console.log(message);
     for (var i = 0; i < 5; i++) {
         console.log(i);
     }
     console.log("Finally: " + i);
-    var count = 5;
+    var count = 5; // Class cohesion
+    var PointClass = /** @class */ (function () {
+        //members
+        // private x: number;
+        // y: number;
+        //?= optional
+        function PointClass(_x, _y) {
+            this._x = _x;
+            this._y = _y;
+        }
+        // method, public by deafult
+        PointClass.prototype.draw = function () {
+            console.log(this._x, this._y);
+        };
+        Object.defineProperty(PointClass.prototype, "x", {
+            // get property
+            get: function () {
+                return this._x;
+            },
+            // set property
+            set: function (value) {
+                if (value < 0)
+                    throw new error("value cannot be less than 0");
+                this._x = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return PointClass;
+    }());
     count = "a";
     console.log(count);
 }
@@ -42,38 +73,8 @@ var drawPoint = function (point /* { x: number; y: number } */) {
     console.log(point);
 };
 drawPoint({ x: 1, y: 2 });
-// Class cohesion
-var PointClass = /** @class */ (function () {
-    //members
-    // private x: number;
-    // y: number;
-    //? = optional
-    // _
-    function PointClass(_x, _y) {
-        this._x = _x;
-        this._y = _y;
-    }
-    // method, public by deafult
-    PointClass.prototype.draw = function () {
-        console.log(this._x, this._y);
-    };
-    Object.defineProperty(PointClass.prototype, "x", {
-        // get property
-        get: function () {
-            return this._x;
-        },
-        // set property
-        set: function (value) {
-            if (value < 0)
-                throw new error("value cannot be less than 0");
-            this._x = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PointClass;
-}());
-var point = new PointClass(1, 2);
+var point_1 = require("./point");
+var point = new point_1.PointClass(1, 2);
 point.x = 100;
 var x = point.x;
 console.log(x);

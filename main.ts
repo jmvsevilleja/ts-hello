@@ -6,7 +6,28 @@ function log(message) {
   }
   console.log("Finally: " + i);
 
-  let count = 5;
+  let count = 5; // Class cohesion
+  class PointClass {
+    //members
+    // private x: number;
+    // y: number;
+    //?= optional
+    constructor(private _x: number, public _y?: number) {}
+    // method, public by deafult
+    draw() {
+      console.log(this._x, this._y);
+    }
+    // get property
+    get x() {
+      return this._x;
+    }
+    // set property
+    set x(value) {
+      if (value < 0) throw new error("value cannot be less than 0");
+
+      this._x = value;
+    }
+  }
   count = "a";
 
   console.log(count);
@@ -63,28 +84,7 @@ let drawPoint = (point: Point /* { x: number; y: number } */) => {
 };
 drawPoint({ x: 1, y: 2 });
 
-// Class cohesion
-class PointClass {
-  //members
-  // private x: number;
-  // y: number;
-  //?= optional
-  constructor(private _x: number, public _y?: number) {}
-  // method, public by deafult
-  draw() {
-    console.log(this._x, this._y);
-  }
-  // get property
-  get x() {
-    return this._x;
-  }
-  // set property
-  set x(value) {
-    if (value < 0) throw new error("value cannot be less than 0");
-
-    this._x = value;
-  }
-}
+import { PointClass } from "./point";
 
 let point = new PointClass(1, 2);
 point.x = 100;
